@@ -57,9 +57,9 @@ async def process_pre_checkout_query(pre_checkout_query: PreCheckoutQuery):
     # разные проверки
     # доступен ли товар 
     # Пример проверки на валидность платежа
-    if not is_payment_valid(pre_checkout_query):
-        await bot.answer_pre_checkout_query(pre_checkout_query.id, ok=False, error_message="Недостаточно средств.")
-        return
+    # if not is_payment_valid(pre_checkout_query):
+    #     await bot.answer_pre_checkout_query(pre_checkout_query.id, ok=False, error_message="Недостаточно средств.")
+    #     return
 
     await bot.answer_pre_checkout_query(pre_checkout_query.id, ok=True)
 
