@@ -51,10 +51,18 @@ async def cmd_start(message: Message, state: FSMContext):
 #####################################################
 ########### ДЛЯ ОПЛАТЫ##############################
 @user_router.pre_checkout_query()
-async def process_pre__checkout_query(pre_checkout_query: PreCheckoutQuery):
-    logger.info(f'pre_checkout_query:{pre_checkout_query}')
+async def process_pre_checkout_query(pre_checkout_query: PreCheckoutQuery):
+    logger.info(f'pre_checkout_query: {pre_checkout_query}')
     from main import bot
+    # разные проверки
+    # доступен ли товар 
+    # Пример проверки на валидность платежа
+    if not is_payment_valid(pre_checkout_query):
+        await bot.answer_pre_checkout_query(pre_checkout_query.id, ok=False, error_message="Недостаточно средств.")
+        return
+
     await bot.answer_pre_checkout_query(pre_checkout_query.id, ok=True)
+
 
 
 
